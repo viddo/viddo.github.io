@@ -1,0 +1,94 @@
+html {
+  font-size: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 100vh;
+  font-family: serif;
+  font-size: 1.2rem;
+  color: #444;
+}
+
+.logo {
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 15rem;
+  height: 10rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+main {
+  max-width: 30rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+
+a {
+  color: #4a90e2;
+}
+a:visited {
+  color: #9b6cec;
+}
+p {
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+p.ps {
+  margin-top: 2.5rem;
+}
+
+ul li {
+  line-height: 1.4;
+}
+
+blockquote {
+  position: relative;
+  font-style: italic;
+  color: #999;
+  margin-left: 3rem;
+}
+blockquote:before {
+  content: "“";
+  position: absolute;
+  top: -1rem;
+  left: -4rem;
+  font-size: 5rem;
+  color: #eee;
+}
+blockquote p {
+  margin: 0.25rem 0 0 0;
+  line-height: 1.2;
+}
+
+h1 {
+  font-family: sans-serif;
+  font-size: 2.4rem;
+  margin: 0;
+  padding: 0;
+}
+
+@media all and (min-width: 52rem) {
+  body {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100vw;
+  }
+
+  .logo {
+    width: 14rem;
+    margin-top: 4rem;
+    margin-left: 4rem;
+    margin-right: 2rem;
+  }
+
+  main {
+    margin-top: 4rem;
+    margin-right: 2rem;
+  }
+}
