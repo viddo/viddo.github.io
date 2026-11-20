@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Astursurf · Gijón</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>">
+  
+  <script>
+    // Runs before first paint, so a saved dark theme never flashes light.
+    // "theme" held the old auto/light/dark cycle, so a stale "light" would block the system theme.
+    localStorage.removeItem("theme");
+    const saved = localStorage.getItem("theme-override");
+    document.documentElement.dataset.theme = saved === "light" || saved === "dark" ? saved
+      : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  </script>
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+    } }
+  </script>
+<link rel="stylesheet" crossorigin href="./index-jthyxv8w.css"><script type="module" crossorigin src="./index-bnn9k40w.js"></script></head>
+<body>
+  <header id="hero">
+    <div id="stage" aria-label="3D view of San Lorenzo beach"></div>
+    <div id="labels" aria-hidden="true"></div>
+
+    <div class="bar">
+      <div class="brand"><strong>Astursurf</strong><span>Gijón · San Lorenzo</span></div>
+    </div>
+    <button id="theme-toggle" class="round" title="Theme" aria-label="Toggle theme"></button>
+
+    <nav class="views" aria-label="Camera views and forecast time">
+      <div class="views-scroll">
+        <div class="seg" id="cam-toggle">
+          <button data-cam="map" title="Top-down map view">🗺️</button><button data-cam="iso" title="Overview: reset to the isometric view">✈️</button><button data-cam="boat" title="Reset to view from a boat">⛵</button><button data-cam="beach" title="Reset to view from the beach">🏖️</button>
+        </div>
+        <span class="divider" aria-hidden="true"></span>
+        <div class="webcams" id="webcams"></div>
+      </div>
+      <label class="time"><span class="track"><span class="ticks" id="ticks" aria-hidden="true"></span><input type="range" id="time" min="0" max="0" value="0" aria-label="Forecast time"></span><output id="time-label">Now</output></label>
+      <button id="fullscreen-toggle" class="round" title="Fullscreen 3D view" aria-pressed="false">⛶</button>
+    </nav>
+  </header>
+  <div id="hero-resize" class="resize" role="separator" aria-orientation="horizontal" aria-label="Resize map (drag, arrow keys, double-tap to reset)" tabindex="0"></div>
+
+  <main>
+    <div class="forecast-bar">
+      <div class="forecast-left">
+        <span class="updated" id="updated"></span>
+        <button id="refresh-toggle" class="round" title="Refresh forecast data" aria-label="Refresh forecast data" hidden>⟳</button>
+      </div>
+      <div class="level-seg" id="profile-seg" aria-label="Surfer level"></div>
+      <button id="lab-toggle" class="round" title="Lab: override the forecast" aria-pressed="false">🛠</button>
+      <button id="guide-toggle" class="round" title="How to read the surf card" aria-label="How to read the surf card">?</button>
+    </div>
+    <section id="table" aria-live="polite">Loading…</section>
+    <dialog id="guide" aria-label="How to read the surf card"><form method="dialog"><button class="close" aria-label="Close">✕</button></form><div id="guide-body"></div></dialog>
+    <dialog id="help" aria-label="Controls: mouse, keyboard, touch"><form method="dialog"><button class="close" aria-label="Close">✕</button></form><div id="help-body"></div></dialog>
+  </main>
+
+  <section class="ground" aria-hidden="true">
+    <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
+      <path class="l1" d="M0 30 Q100 0 220 22 T460 18 T720 26 T980 12 T1200 24 V320 H0 Z"/>
+      <path class="l2" d="M0 90 Q150 60 320 86 T640 80 T960 92 T1200 76 V320 H0 Z"/>
+      <path class="l3" d="M0 160 Q200 130 420 156 T820 150 T1200 146 V320 H0 Z"/>
+      <path class="l4" d="M0 230 Q240 206 520 228 T1200 220 V320 H0 Z"/>
+    </svg>
+    <div class="buried">
+      <span class="fossil" title="Ammonite">🐚</span>
+      <span class="board" title="Lost surfboard"></span>
+      <span class="bottle" title="Sidra"></span>
+      <span class="worm">〰</span>
+    </div>
+  </section>
+  <footer>
+    <div class="cols">
+      <div><h3>Explore</h3><a href="#">Surf forecast</a><a href="#">Beaches of Asturias</a><a href="#">Webcams</a></div>
+      <div><h3>About</h3><a href="#">About Astursurf</a><a href="#">How the surf rating works</a><a href="#">San Lorenzo guide</a><a href="#">Roadmap</a></div>
+      <div><h3>Community</h3><a href="#">Contribute</a><a href="#">Illustrators wanted</a><a href="#">Surf schools</a><a href="#">Local partners</a></div>
+      <div><h3>Info</h3><a href="#">Data sources</a><a href="#">Kudos &amp; credits</a><a href="#">Privacy</a><a href="#">GitHub</a></div>
+    </div>
+    <p>Fecho en Xixón · Data <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0) · Map <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a> (ODbL), buildings © <a href="https://www.catastro.hacienda.gob.es/">Catastro</a>, terrain © <a href="https://www.ign.es/">IGN</a> (CC BY 4.0), beach: obra derivada de LiDAR-PNOA-cob2 2015-2021 CC-BY 4.0 <a href="https://www.scne.es/">scne.es</a></p>
+  </footer>
+
+  
+</body>
+</html>
